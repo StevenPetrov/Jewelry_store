@@ -22,7 +22,9 @@ INSTALLED_APPS = [
 
     #my apps
     'Jewelry_store.authorisation',
-    'Jewelry_store.webview'
+    'Jewelry_store.webview',
+    'Jewelry_store.profiles',
+    'Jewelry_store.products',
 ]
 
 MIDDLEWARE = [

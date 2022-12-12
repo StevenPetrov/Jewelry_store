@@ -1,6 +1,6 @@
 from django import forms
 
-from Jewelry_store.webview.models import Product
+from Jewelry_store.products.models import Product
 
 
 class ProductBaseFrom(forms.ModelForm):
