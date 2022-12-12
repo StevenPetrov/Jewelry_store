@@ -1,4 +1,5 @@
 from django.contrib.auth import views as auth_views, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -25,7 +26,7 @@ class SignInView(auth_views.LoginView):
         return reverse_lazy('index')
 
 
-class SignOutView(auth_views.LogoutView):
+class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
     template_name = 'auth_handling/../../templates/auth_handling/sign-out.html'
 
     def get_success_url(self):

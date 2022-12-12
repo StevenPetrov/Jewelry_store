@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
@@ -17,7 +18,7 @@ def profile_details(request):
     return render(request, 'profile/profile-details.html', context)
 
 
-class UserEditView(views.UpdateView):
+class UserEditView(LoginRequiredMixin, views.UpdateView):
     template_name = 'profile/profile-update.html'
     model = UserModel
     fields = ('username', 'first_name', 'last_name', 'email', 'image_field')
