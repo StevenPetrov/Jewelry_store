@@ -6,6 +6,7 @@ from Jewelry_store.products.models import Product
 UserModel = get_user_model()
 
 def add_product(request):
+    profile = request.user
     if request.method == 'GET':
         form = ProductCreateForm()
     else:
@@ -19,8 +20,10 @@ def add_product(request):
     context = {
         'form': form,
     }
-
-    return render(request, 'products/product-add.html', context)
+    if profile.pk:
+        return render(request, 'products/product-add.html', context)
+    else:
+        return render(request, '404.html')
 
 
 def details_product(request, pk):
@@ -39,6 +42,7 @@ def details_product(request, pk):
 
 
 def delete_product(request, pk):
+    profile = request.user
     product = Product.objects.filter(pk=pk).get()
     owner = UserModel.objects.filter(pk=product.user_id).get()
     if request.method == 'GET':
@@ -53,5 +57,9 @@ def delete_product(request, pk):
         'product': product,
         'owner': owner
     }
-    return render(request, 'products/product_delete_form.html', context)
+    if profile.pk:
+        return render(request, 'products/product_delete_form.html', context)
+    else:
+        return render(request, '404.html')
+
 

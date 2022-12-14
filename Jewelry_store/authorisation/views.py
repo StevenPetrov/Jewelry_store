@@ -26,7 +26,7 @@ class SignInView(auth_views.LoginView):
         return reverse_lazy('index')
 
 
-class SignOutView(auth_views.LogoutView, LoginRequiredMixin):
+class SignOutView(LoginRequiredMixin, auth_views.LogoutView):
     template_name = 'auth_handling/../../templates/auth_handling/sign-out.html'
 
     def get_success_url(self):

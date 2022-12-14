@@ -1,4 +1,4 @@
-{% extends 'navbars/navbar_profile.html' %}
+{% extends 'navbars/test_navbar.html' %}
 {% block content %}
     <style>
         /* CSS design by @jofpin */
@@ -10,7 +10,7 @@
         }
 
         body {
-            background: #adadad;
+            background: #fffcdd;
             padding: 2.23em;
         }
 
@@ -21,22 +21,22 @@
         }
 
         .title-pen span {
-            color: #000000;
+            color: #55acee;
         }
 
         .user-profile {
             margin: auto;
-            width: 40em;
-            height: 23em;
-            background: #808080;
+            width: 25em;
+            height: 11em;
+            background: #fff;
             border-radius: .3em;
         }
 
         .user-profile .username {
             margin: auto;
-            margin-top: -7em;
-            margin-left: 13em;
-            color: #00ffff;
+            margin-top: -4.40em;
+            margin-left: 5.80em;
+            color: #658585;
             font-size: 1.53em;
             font-family: "Coda", sans-serif;
             font-weight: bold;
@@ -45,7 +45,7 @@
         .user-profile .bio {
             margin: auto;
             display: inline-block;
-            margin-left: 22.7em;
+            margin-left: 10.43em;
             color: #e76043;
             font-size: .87em;
             font-family: "varela round", sans-serif;
@@ -54,7 +54,7 @@
         .user-profile > .description {
             margin: auto;
             margin-top: 1.35em;
-            margin-right: 9.43em;
+            margin-right: 4.43em;
             width: 14em;
             color: #c0c5c5;
             font-size: .87em;
@@ -63,15 +63,15 @@
 
         .user-profile > img.avatar {
             padding: .7em;
-            margin-left: 4em;
-            margin-top: 3em;
-            height: 13.23em;
-            width: 13.23em;
+            margin-left: .3em;
+            margin-top: .3em;
+            height: 6.23em;
+            width: 6.23em;
             border-radius: 18em;
         }
 
         .user-profile ul.data {
-            margin: 7.9em auto;
+            margin: 2em auto;
             height: 3.70em;
             background: #4eb6b6;
             text-align: center;
@@ -113,7 +113,7 @@
             color: #ea4c89;
         }
     </style>
-    <h1 class="title-pen"><span>USER PROFILE</span></h1>
+    <h1 class="title-pen"><span>User profile</span></h1>
     <div class="user-profile">
         <img class="avatar"
              {% if profile.image_field %}
@@ -131,27 +131,57 @@
             {% endif %}
         </div>
         <div class="description">
-        <br>
-            {% if profile.first_name %}
-            First name: {{ profile.first_name }}
-            {% endif %}
-        <br>
-            {% if profile.last_name %}
-            Last name: {{ profile.last_name }}
-            {% endif %}
-        <br>
             {% if profile.email %}
-            Email: {{ profile.email }}
+            {{ profile.email }}
             {% endif %}
         </div>
         <ul class="data">
             <li>
                 <span> Number of items for sale: {{ products.count }}</span>
             </li>
-
+{#            <li>#}
+{#                <span class="entypo-eye"> 853</span>#}
+{#            </li>#}
+{#            <li>#}
+{#                <span class="entypo-user"> 311</span>#}
             </li>
         </ul>
     </div>
 
+{#    <section id="detailsPage">#}
+{#        <div class="wrapper">#}
+{#            <a href="{% url 'index' %}" class="remove">HOME PAGE</a>#}
+{#            <a href="{% url 'profile edit' pk=request.user.pk %}" class="remove">Edit profile</a>#}
+{#            <a href="{% url 'profile delete' pk=request.user.pk %}" class="remove">Delete profile</a>#}
+{#            <a href="{% url 'add product' %}" class="remove">Add product</a>#}
+{#            <div class="profilePage">#}
+{#                <img src="#"#}
+{#                     alt="Profile Image">#}
+{#            </div>#}
+{#            <img src="{{ profile }}" alt="Cover Image">#}
+{#            <div class="profileText">#}
+{#                <!-- Profile Info -->#}
+{#                <h1>Username: {{ profile.username }}</h1>#}
+{#                {% if profile.email %}#}
+{#                    <h1>Email: {{ profile.email }}</h1>#}
+{#                {% endif %}#}
+{#                {% if profile.first_name %}#}
+{#                    <h1>First Name: {{ profile.first_name }}</h1>#}
+{#                {% endif %}#}
+{#                {% if profile.first_name %}#}
+{#                    <h1>Last Name: {{ profile.last_name }}</h1>#}
+{#                {% endif %}#}
+{##}
+{#            </div>#}
+{##}
+{#            <div class="actionBtn">#}
+{#                <!-- Button for Deleting the Profile -->#}
+                {#            <a href="{% url 'profile delete' %}" class="remove">Delete</a>#}
+                {#            <a href="{% url 'profile edit' %}" class="remove">Edit</a>#}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </section>#}
 
 {% endblock %}

@@ -144,496 +144,121 @@
 
 </head>
 {% if request.user.pk %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Roboto');
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
 
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
+                            class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <a href="{% url 'index' %}" class="navbar-brand">EUDORA JEWELRY</a>
+                </div>
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
+                <div class="navbar-collapse collapse" id="mobile_menu">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{% url 'index' %}">Home page</a></li>
+                        <li><a href="{% url 'store view' %}">Store</a></li>
+                        {% if request.user.pk %}
+                            <li><a href="{% url 'all products owned' %}">My products</a></li>
+                            <li><a href="{% url 'add product' %}">Add product for sale</a></li>
+                            <li><a href="{% url 'profile edit' pk=request.user.pk %}">Edit profile</a></li>
+                            <li><a href="{% url 'profile delete' pk=request.user.pk %}">Delete profile</a></li>
 
-        i {
-            margin-right: 10px;
-        }
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <form action="" class="navbar-form">
+                                <div class="form-group">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
 
-        /*----------bootstrap-navbar-css------------*/
-        .navbar-logo {
-            padding: 15px;
-            color: #fff;
-        }
-
-        .navbar-mainbg {
-            background-color: #5161ce;
-            padding: 0px;
-        }
-
-        #navbarSupportedContent {
-            overflow: hidden;
-            position: relative;
-        }
-
-        #navbarSupportedContent ul {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        #navbarSupportedContent ul li a i {
-            margin-right: 10px;
-        }
-
-        #navbarSupportedContent li {
-            list-style-type: none;
-            float: left;
-        }
-
-        #navbarSupportedContent ul li a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 15px;
-            display: block;
-            padding: 20px 20px;
-            transition-duration: 0.6s;
-            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-        }
-
-        #navbarSupportedContent > ul > li.active > a {
-            color: #5161ce;
-            background-color: transparent;
-            transition: all 0.7s;
-        }
-
-        #navbarSupportedContent a:not(:only-child):after {
-            content: "\f105";
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            font-size: 14px;
-            font-family: "Font Awesome 5 Free";
-            display: inline-block;
-            padding-right: 3px;
-            vertical-align: middle;
-            font-weight: 900;
-            transition: 0.5s;
-        }
-
-        #navbarSupportedContent .active > a:not(:only-child):after {
-            transform: rotate(90deg);
-        }
-
-        .hori-selector {
-            display: inline-block;
-            position: absolute;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-            transition-duration: 0.6s;
-            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            background-color: #fff;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            margin-top: 10px;
-        }
-
-        .hori-selector .right,
-        .hori-selector .left {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: #fff;
-            bottom: 10px;
-        }
-
-        .hori-selector .right {
-            right: -25px;
-        }
-
-        .hori-selector .left {
-            left: -25px;
-        }
-
-        .hori-selector .right:before,
-        .hori-selector .left:before {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #5161ce;
-        }
-
-        .hori-selector .right:before {
-            bottom: 0;
-            right: -25px;
-        }
-
-        .hori-selector .left:before {
-            bottom: 0;
-            left: -25px;
-        }
-
-
-        @media (min-width: 992px) {
-            .navbar-expand-custom {
-                -ms-flex-flow: row nowrap;
-                flex-flow: row nowrap;
-                -ms-flex-pack: start;
-                justify-content: flex-start;
-            }
-
-            .navbar-expand-custom .navbar-nav {
-                -ms-flex-direction: row;
-                flex-direction: row;
-            }
-
-            .navbar-expand-custom .navbar-toggler {
-                display: none;
-            }
-
-            .navbar-expand-custom .navbar-collapse {
-                display: -ms-flexbox !important;
-                display: flex !important;
-                -ms-flex-preferred-size: auto;
-                flex-basis: auto;
-            }
-        }
-
-
-        @media (max-width: 991px) {
-            #navbarSupportedContent ul li a {
-                padding: 12px 30px;
-            }
-
-            .hori-selector {
-                margin-top: 0px;
-                margin-left: 10px;
-                border-radius: 0;
-                border-top-left-radius: 25px;
-                border-bottom-left-radius: 25px;
-            }
-
-            .hori-selector .left,
-            .hori-selector .right {
-                right: 10px;
-            }
-
-            .hori-selector .left {
-                top: -25px;
-                left: auto;
-            }
-
-            .hori-selector .right {
-                bottom: -25px;
-            }
-
-            .hori-selector .left:before {
-                left: -25px;
-                top: -25px;
-            }
-
-            .hori-selector .right:before {
-                bottom: -25px;
-                left: -25px;
-            }
-        }
-    </style>
-
-</head>
-<body>
-<nav class="navbar navbar-expand-custom navbar-mainbg">
-    {#        <a class="navbar-brand navbar-logo" href="#"></a>#}
-    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <div class="hori-selector">
-                <div class="left"></div>
-                <div class="right"></div>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.pk %}
+                            <li><a href="{% url 'profile details' %}"><span class="glyphicon glyphicon-user"></span>
+                                Profile</a></li>
+                        {% endif %}
+                        {% if request.user.pk %}
+                            <li><a href="{% url 'sign out' %}"><span class="glyphicon glyphicon-log-in"></span> Sign out
+                                <span class="caret"></span></a>
+                                {% else %}
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                    class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span
+                                    class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'sign in' %}">Login</a></li>
+                                    <li><a href="{% url 'sign up' %}">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-tachometer-alt"></i>Home page</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile details' %}"><i class="fas fa-tachometer-alt"></i>Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile edit' pk=request.user.pk %}"><i
-                        class="fas fa-tachometer-alt"></i>Edit profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile delete' pk=request.user.pk %}"><i
-                        class="fas fa-tachometer-alt"></i>Delete profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add product' %}"><i class="fas fa-tachometer-alt"></i>Add product for
-                    sale</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'all products owned' %}"><i class="fas fa-tachometer-alt"></i>My
-                    products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'sign out' %}"><i class="fas fa-tachometer-alt"></i>Sign Out</a>
-            </li>
-
-        </ul>
+        </div>
     </div>
-</nav>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 {% block content %}
 {% endblock %}
 
-</body>
-
-</html>
-
 {% else %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eudora Jewelry</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Roboto');
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
 
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <a href="{% url 'index' %}" class="navbar-brand">EUDORA JEWELRY</a>
+                    </div>
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{% url 'index' %}">Home page</a></li>
+                            <li><a href="{% url 'store view' %}">Store</a></li>
+                            {% if request.user.pk %}
+                            <li><a href="{% url 'add product' %}">Add a product for sale</a></li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form action="" class="navbar-form">
+                                    <div class="form-group">
+{#                                        <div class="input-group">#}
+{#                                            <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">#}
+{#                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>#}
+{#                                        </div>#}
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
 
-        i {
-            margin-right: 10px;
-        }
-
-        /*----------bootstrap-navbar-css------------*/
-        .navbar-logo {
-            padding: 15px;
-            color: #fff;
-        }
-
-        .navbar-mainbg {
-            background-color: #5161ce;
-            padding: 0px;
-        }
-
-        #navbarSupportedContent {
-            overflow: hidden;
-            position: relative;
-        }
-
-        #navbarSupportedContent ul {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        #navbarSupportedContent ul li a i {
-            margin-right: 10px;
-        }
-
-        #navbarSupportedContent li {
-            list-style-type: none;
-            float: left;
-        }
-
-        #navbarSupportedContent ul li a {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 15px;
-            display: block;
-            padding: 20px 20px;
-            transition-duration: 0.6s;
-            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-        }
-
-        #navbarSupportedContent > ul > li.active > a {
-            color: #5161ce;
-            background-color: transparent;
-            transition: all 0.7s;
-        }
-
-        #navbarSupportedContent a:not(:only-child):after {
-            content: "\f105";
-            position: absolute;
-            right: 20px;
-            top: 10px;
-            font-size: 14px;
-            font-family: "Font Awesome 5 Free";
-            display: inline-block;
-            padding-right: 3px;
-            vertical-align: middle;
-            font-weight: 900;
-            transition: 0.5s;
-        }
-
-        #navbarSupportedContent .active > a:not(:only-child):after {
-            transform: rotate(90deg);
-        }
-
-        .hori-selector {
-            display: inline-block;
-            position: absolute;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-            transition-duration: 0.6s;
-            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            background-color: #fff;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            margin-top: 10px;
-        }
-
-        .hori-selector .right,
-        .hori-selector .left {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            background-color: #fff;
-            bottom: 10px;
-        }
-
-        .hori-selector .right {
-            right: -25px;
-        }
-
-        .hori-selector .left {
-            left: -25px;
-        }
-
-        .hori-selector .right:before,
-        .hori-selector .left:before {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #5161ce;
-        }
-
-        .hori-selector .right:before {
-            bottom: 0;
-            right: -25px;
-        }
-
-        .hori-selector .left:before {
-            bottom: 0;
-            left: -25px;
-        }
-
-
-        @media (min-width: 992px) {
-            .navbar-expand-custom {
-                -ms-flex-flow: row nowrap;
-                flex-flow: row nowrap;
-                -ms-flex-pack: start;
-                justify-content: flex-start;
-            }
-
-            .navbar-expand-custom .navbar-nav {
-                -ms-flex-direction: row;
-                flex-direction: row;
-            }
-
-            .navbar-expand-custom .navbar-toggler {
-                display: none;
-            }
-
-            .navbar-expand-custom .navbar-collapse {
-                display: -ms-flexbox !important;
-                display: flex !important;
-                -ms-flex-preferred-size: auto;
-                flex-basis: auto;
-            }
-        }
-
-
-        @media (max-width: 991px) {
-            #navbarSupportedContent ul li a {
-                padding: 12px 30px;
-            }
-
-            .hori-selector {
-                margin-top: 0px;
-                margin-left: 10px;
-                border-radius: 0;
-                border-top-left-radius: 25px;
-                border-bottom-left-radius: 25px;
-            }
-
-            .hori-selector .left,
-            .hori-selector .right {
-                right: 10px;
-            }
-
-            .hori-selector .left {
-                top: -25px;
-                left: auto;
-            }
-
-            .hori-selector .right {
-                bottom: -25px;
-            }
-
-            .hori-selector .left:before {
-                left: -25px;
-                top: -25px;
-            }
-
-            .hori-selector .right:before {
-                bottom: -25px;
-                left: -25px;
-            }
-        }
-    </style>
-
-</head>
-<body>
-<nav class="navbar navbar-expand-custom navbar-mainbg">
-    {#        <a class="navbar-brand navbar-logo" href="#"></a>#}
-    <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-        <i class="fas fa-bars text-white"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <div class="hori-selector">
-                <div class="left"></div>
-                <div class="right"></div>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.pk %}
+                            <li><a href="{% url 'profile details' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            {% endif %}
+                            {% if request.user.pk %}
+                            <li><a href="{% url 'sign out' %}"  ><span class="glyphicon glyphicon-log-in"></span> Sign out </a>
+                            {% else %}
+                                <li><a href="{% url 'sign in' %}"  ><span class="glyphicon glyphicon-log-in"></span> Login </a>
+                                <li><a href="{% url 'sign up' %}"  ><span class="glyphicon glyphicon-log-in"></span> Register </a>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}"><i class="fas fa-tachometer-alt"></i>Home page</a>
-            </li>
-
-
-        </ul>
+        </div>
     </div>
-</nav>
-
-
-</body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>
 
 {% endif %}

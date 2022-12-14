@@ -1,4 +1,4 @@
-{% extends 'navbars/navbar.html' %}
+{% extends 'navbars/test_navbar.html' %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
         /* Globals */
         body {
             font-family: "Inter", sans-serif;
-            max-width: 55rem;
+            {#max-width: 55rem;#}
             padding: 2rem 1.5rem;
             margin: 0 auto;
             color: #241623;
@@ -36,7 +36,7 @@
             display: grid;
             grid-template-columns: repeat(
     auto-fill,
-    minmax(var(--auto-grid-min-size, 14rem), 1fr)
+    minmax(var(--auto-grid-min-size, 20rem), 1fr)
   );
             grid-gap: var(--auto-grid-gap, 0);
             padding: 0;

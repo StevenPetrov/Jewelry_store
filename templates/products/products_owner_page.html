@@ -1,4 +1,4 @@
-{% extends 'navbars/navbar.html' %}
+{% extends 'navbars/test_navbar.html' %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
         /* Globals */
         body {
             font-family: "Inter", sans-serif;
-            max-width: 55rem;
+            {#max-width: 55rem;#}
             padding: 2rem 1.5rem;
             margin: 0 auto;
             color: #241623;
@@ -36,7 +36,7 @@
             display: grid;
             grid-template-columns: repeat(
     auto-fill,
-    minmax(var(--auto-grid-min-size, 14rem), 1fr)
+    minmax(var(--auto-grid-min-size, 20rem), 1fr)
   );
             grid-gap: var(--auto-grid-gap, 0);
             padding: 0;
@@ -182,7 +182,8 @@
 </head>
 <body>
 <article class="flow">
-    <h1>Products for sale:</h1>
+<br>
+    <h1>My products for sale:</h1>
     <br>
     <div class="team">
         <ul class="auto-grid" role="list">
@@ -192,7 +193,6 @@
                     <a href="{% url 'details product' pk=product.pk %}" target=_blank" class="profile">
                         <h2 class="profile__name">{{ product.name }}</h2>
                         <p> {{ product.product_price }}</p>
-{#                        <p> Owned by: {{ profile. }}</p>#}
                         <img alt="ITem" src="{{ product.product_photo }}"/>
                     </a>
                 </li>

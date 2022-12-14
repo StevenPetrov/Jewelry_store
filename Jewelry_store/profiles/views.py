@@ -15,13 +15,16 @@ def profile_details(request):
         'profile': profile,
         'products': products,
     }
-    return render(request, 'profile/profile-details.html', context)
+    if profile.pk:
+        return render(request, 'profile/profile-details.html', context)
+    else:
+        return render(request, '404.html')
 
 
 class UserEditView(LoginRequiredMixin, views.UpdateView):
     template_name = 'profile/profile-update.html'
     model = UserModel
-    fields = ('username', 'first_name', 'last_name', 'email', 'image_field')
+    fields = ('first_name', 'last_name', 'email', 'image_field')
 
     def get_success_url(self):
         return reverse_lazy('profile details')
@@ -34,10 +37,13 @@ def profile_products_owned(request):
         'profile': profile,
         'products': products,
     }
-    return render(request, 'products/products_owner_page.html', context)
+    if profile.pk:
+        return render(request, 'products/products_owner_page.html', context)
+    else:
+        return render(request, '404.html')
 
 
-class UserDeleteView(views.DeleteView):
+class UserDeleteView(LoginRequiredMixin,views.DeleteView):
     template_name = 'profile/profile delete.html'
     model = UserModel
     success_url = reverse_lazy('index')
