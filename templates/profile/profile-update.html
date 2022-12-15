@@ -204,6 +204,7 @@
             {% endif %}
          alt="profile_image"/>
     <div class="username">{{ object.username }}</div>
+    {% if request.user.pk == object.pk %}
     <div class="bio">
             {% if profile.is_superuser %}
             The god user is here!
@@ -233,9 +234,11 @@
 
 
             {% csrf_token %}
-            <div class="button_container">
-                <button class="btn"><span>Edit profile!</span></button>
-            </div>
+
+                <div class="button_container">
+                    <button class="btn"><span>Edit profile!</span></button>
+                </div>
+            {% endif %}
             <ul class="data">
 
             </ul>

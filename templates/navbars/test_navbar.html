@@ -14,17 +14,14 @@
                             <li class="active"><a href="{% url 'index' %}">Home page</a></li>
                             <li><a href="{% url 'store view' %}">Store</a></li>
                             {% if request.user.pk %}
-                            <li><a href="{% url 'add product' %}">Add a product</a></li>
+                            <li><a href="{% url 'add product' %}">Add product for sale</a></li>
                             {% endif %}
                         </ul>
                         <ul class="nav navbar-nav">
                             <li>
                                 <form action="" class="navbar-form">
                                     <div class="form-group">
-{#                                        <div class="input-group">#}
-{#                                            <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">#}
-{#                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>#}
-{#                                        </div>#}
+
                                     </div>
                                 </form>
                             </li>

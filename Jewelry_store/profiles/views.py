@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
 from Jewelry_store.products.models import Product
@@ -28,6 +28,8 @@ class UserEditView(LoginRequiredMixin, views.UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('profile details')
+
+
 
 
 def profile_products_owned(request):
