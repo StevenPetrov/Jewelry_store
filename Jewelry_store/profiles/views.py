@@ -45,7 +45,7 @@ def profile_products_owned(request):
         return render(request, '404.html')
 
 
-class UserDeleteView(LoginRequiredMixin,views.DeleteView):
+class UserDeleteView(LoginRequiredMixin, views.DeleteView):
     template_name = 'profile/profile delete.html'
     model = UserModel
     success_url = reverse_lazy('index')

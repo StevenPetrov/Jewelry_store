@@ -28,6 +28,7 @@ class SignUpView(views.CreateView):
 class SignInView(auth_views.LoginView):
     template_name = 'auth_handling/../../templates/auth_handling/sign-in.html'
     redirect_authenticated_user = reverse_lazy('index')
+
     def get_success_url(self):
         return reverse_lazy('index')
 

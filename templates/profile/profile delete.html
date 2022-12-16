@@ -10,9 +10,14 @@
         }
 
         body {
-            background: #adadad;
-            padding: 2.23em;
+            margin: 0;
+            height: 100%;
+            background-image: linear-gradient(to top, #dcaf74 0%, #fdf7e7 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
         }
+
 
         .title-pen {
             color: #333;
@@ -21,14 +26,14 @@
         }
 
         .title-pen span {
-            color: #000000;
+            color: #81562b;
         }
 
         .user-profile {
             margin: auto;
             width: 40em;
             height: 30em;
-            background: #808080;
+            background-image: linear-gradient(to top, #81562b 0%, #fdf7e7 100%);
             border-radius: .3em;
         }
 
@@ -36,7 +41,7 @@
             margin: auto;
             margin-top: -7em;
             margin-left: 13em;
-            color: #00ffff;
+            color: #81562b;
             font-size: 1.53em;
             font-family: "Coda", sans-serif;
             font-weight: bold;
@@ -56,7 +61,7 @@
             margin-top: 1.35em;
             margin-right: 9.43em;
             width: 14em;
-            color: #c0c5c5;
+            color: #462607;
             font-size: .87em;
             font-family: "varela round", sans-serif;
         }
@@ -116,20 +121,12 @@
 
         @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
-        body {
-            margin: 0;
-            height: 100%;
-            background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-        }
 
         .button_container {
             position: absolute;
             left: 0;
             right: 0;
-            top: 58%;
+            top: 45%;
         }
 
         .description, .link {
@@ -171,7 +168,7 @@
             top: 0;
             height: 490%;
             width: 140%;
-            background: #78c7d2;
+            background: #dcaf74;
             -webkit-transition: all .5s ease-in-out;
             transition: all .5s ease-in-out;
             -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
@@ -196,19 +193,19 @@
     </style>
     <h1 class="title-pen"><span>USER PROFILE</span></h1>
     <div class="user-profile">
-    <img class="avatar"
-            {% if object.image_field %}
-         src="{{ object.image_field }}"
-            {% else %}
-         src="https://beaconsultlb.com/wp-content/uploads/2022/05/anonymous-avatar-icon-25.png"
-            {% endif %}
-         alt="profile_image"/>
-    <div class="username">{{ object.username }}</div>
-     <div class="bio">
+        <img class="avatar"
+                {% if object.image_field %}
+             src="{{ object.image_field }}"
+                {% else %}
+             src="https://beaconsultlb.com/wp-content/uploads/2022/05/anonymous-avatar-icon-25.png"
+                {% endif %}
+             alt="profile_image"/>
+        <div class="username">{{ object.username }}</div>
+        <div class="bio">
             {% if profile.is_superuser %}
-            The god user is here!
+                The god user is here!
             {% else %}
-            Regular user
+                Regular user
             {% endif %}
         </div>
 

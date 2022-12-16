@@ -25,4 +25,3 @@ class ProductDeleteForm(ProductBaseFrom):
         if commit:
             self.instance.delete()
         return self.instance
-

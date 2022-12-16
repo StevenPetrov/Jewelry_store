@@ -299,7 +299,6 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <!-- Tabs Titles -->
         <h2 class="active">Sign out </h2>
 
         <form method="post" action="{% url 'sign out' %}">
@@ -308,8 +307,6 @@
             {% csrf_token %}
         </form>
 
-
-        <!-- Remind Passowrd -->
         <div id="formFooter">
             <a class="underlineHover" href="{% url 'index' %}">HOME PAGE</a>
         </div>

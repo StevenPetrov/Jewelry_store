@@ -14,15 +14,18 @@
 	<link rel="stylesheet" type="text/css" href="../static/style/mystyle.css">
 </head>
 <body>
-<!-- Header -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<div class="navbar navbar-inverse">
+
+{% if request.user.pk %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <div class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="navbar-header">
-                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
+                                class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
                         <a href="{% url 'index' %}" class="navbar-brand">EUDORA JEWELRY</a>
                     </div>
 
@@ -31,14 +34,17 @@
                             <li class="active"><a href="{% url 'index' %}">Home page</a></li>
                             <li><a href="{% url 'store view' %}">Store</a></li>
                             {% if request.user.pk %}
-                            <li><a href="{% url 'add product' %}">Add product for sale</a></li>
+                                <li><a href="{% url 'all products owned' %}">My products</a></li>
+                                <li><a href="{% url 'add product' %}">Add product for sale</a></li>
+                                <li><a href="{% url 'profile edit' pk=request.user.pk %}">Edit profile</a></li>
+                                <li><a href="{% url 'profile delete' pk=request.user.pk %}">Delete profile</a></li>
+
                             {% endif %}
                         </ul>
                         <ul class="nav navbar-nav">
                             <li>
                                 <form action="" class="navbar-form">
                                     <div class="form-group">
-
                                     </div>
                                 </form>
                             </li>
@@ -46,13 +52,22 @@
 
                         <ul class="nav navbar-nav navbar-right">
                             {% if request.user.pk %}
-                            <li><a href="{% url 'profile details' %}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                                <li><a href="{% url 'profile details' %}"><span class="glyphicon glyphicon-user"></span>
+                                    Profile</a></li>
                             {% endif %}
                             {% if request.user.pk %}
-                            <li><a href="{% url 'sign out' %}"  ><span class="glyphicon glyphicon-log-in"></span> Sign out </a>
-                            {% else %}
-                                <li><a href="{% url 'sign in' %}"  ><span class="glyphicon glyphicon-log-in"></span> Login </a>
-                                <li><a href="{% url 'sign up' %}"  ><span class="glyphicon glyphicon-log-in"></span> Register </a>
+                                <li><a href="{% url 'sign out' %}"><span class="glyphicon glyphicon-log-in"></span> Sign
+                                    out
+                                    <span class="caret"></span></a>
+                                    {% else %}
+                                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                                        class="glyphicon glyphicon-log-in"></span> Login / Sign Up <span
+                                        class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'sign in' %}">Login</a></li>
+                                        <li><a href="{% url 'sign up' %}">Sign Up</a></li>
+                                    </ul>
+                                </li>
                             {% endif %}
                         </ul>
                     </div>
@@ -60,10 +75,74 @@
             </div>
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!--_______________________________________ Carousel__________________________________ -->
+    {% block content %}
+    {% endblock %}
+
+{% else %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <div class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse"><span
+                                class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                        </button>
+                        <a href="{% url 'index' %}" class="navbar-brand">EUDORA JEWELRY</a>
+                    </div>
+
+                    <div class="navbar-collapse collapse" id="mobile_menu">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{% url 'index' %}">Home page</a></li>
+                            <li><a href="{% url 'store view' %}">Store</a></li>
+                            {% if request.user.pk %}
+                                <li><a href="{% url 'add product' %}">Add a product for sale</a></li>
+                            {% endif %}
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form action="" class="navbar-form">
+                                    <div class="form-group">
+                                        {#                                        <div class="input-group">#}
+                                        {#                                            <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">#}
+                                        {#                                            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>#}
+                                        {#                                        </div>#}
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.pk %}
+                                <li><a href="{% url 'profile details' %}"><span class="glyphicon glyphicon-user"></span>
+                                    Profile</a></li>
+                            {% endif %}
+                            {% if request.user.pk %}
+                                <li><a href="{% url 'sign out' %}"><span class="glyphicon glyphicon-log-in"></span> Sign
+                                    out </a>
+                                    {% else %}
+                                <li><a href="{% url 'sign in' %}"><span class="glyphicon glyphicon-log-in"></span> Login
+                                </a>
+                                <li>
+                                <a href="{% url 'sign up' %}"><span class="glyphicon glyphicon-log-in"></span> Register
+                                </a>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+{% endif %}
+
 <div class="allcontain">
 	<div id="carousel-up" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner " role="listbox">
