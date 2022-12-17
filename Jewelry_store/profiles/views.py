@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -8,6 +9,7 @@ from Jewelry_store.products.models import Product
 UserModel = get_user_model()
 
 
+@login_required(login_url='sign in')
 def profile_details(request):
     profile = request.user
     products = Product.objects.filter(user_id=profile.id)
@@ -15,10 +17,8 @@ def profile_details(request):
         'profile': profile,
         'products': products,
     }
-    if profile.pk:
-        return render(request, 'profile/profile-details.html', context)
-    else:
-        return render(request, '404.html')
+
+    return render(request, 'profile/profile-details.html', context)
 
 
 class UserEditView(LoginRequiredMixin, views.UpdateView):
@@ -30,8 +30,7 @@ class UserEditView(LoginRequiredMixin, views.UpdateView):
         return reverse_lazy('profile details')
 
 
-
-
+@login_required(login_url='sign in')
 def profile_products_owned(request):
     profile = request.user
     products = Product.objects.filter(user_id=profile.id)
@@ -39,10 +38,8 @@ def profile_products_owned(request):
         'profile': profile,
         'products': products,
     }
-    if profile.pk:
-        return render(request, 'products/products_owner_page.html', context)
-    else:
-        return render(request, '404.html')
+
+    return render(request, 'products/products_owner_page.html', context)
 
 
 class UserDeleteView(LoginRequiredMixin, views.DeleteView):
