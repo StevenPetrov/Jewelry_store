@@ -24,7 +24,6 @@ class SignUpView(views.CreateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-
 class SignInView(auth_views.LoginView):
     template_name = 'auth_handling/../../templates/auth_handling/sign-in.html'
     redirect_authenticated_user = reverse_lazy('index')

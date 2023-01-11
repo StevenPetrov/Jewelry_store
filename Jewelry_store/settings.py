@@ -1,9 +1,10 @@
 
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-wzyo)%o-lv#psm#lexf5o6+6pb(t^uemn8ttpu3m3!cfx$qv9('
+SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
@@ -65,11 +66,11 @@ WSGI_APPLICATION = 'Jewelry_store.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Jewelry_db',
-        'USER': 'wewe1234',
-        'PASSWORD': 'wewe1234',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 

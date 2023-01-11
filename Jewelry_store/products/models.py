@@ -3,6 +3,7 @@ from django.db import models
 
 UserModel = get_user_model()
 
+
 class Product(models.Model):
     MAX_NAME = 40
 

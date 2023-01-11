@@ -6,6 +6,7 @@ from Jewelry_store.products.models import Product
 
 UserModel = get_user_model()
 
+
 @login_required(login_url='sign in')
 def add_product(request):
     if request.method == 'GET':
